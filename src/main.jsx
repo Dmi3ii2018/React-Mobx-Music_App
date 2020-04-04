@@ -8,7 +8,7 @@ export class MainPage extends React.PureComponent {
     render() {
       return (
         <div className="player">
-      <div className="cover"></div>
+        <div className="cover"></div>
       <Navigation />
       <Player />
       <div className="btn">
