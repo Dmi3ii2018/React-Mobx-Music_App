@@ -14,28 +14,24 @@ export class  Player extends React.PureComponent {
     this.state = {
       currentSongSrc: ``,
     }
-    this.trackMusicChange();
+    this.song = null;
+    // this.trackMusicChange();
   }
 
-  trackMusicChange() {
-    if(this.cancelMusicChange) {
-      this.cancelMusicChange();
+  componentDidUpdate() {
+    if(this.song) {
+      this.song = null;
     }
-    this.cancelMusicChange = reaction(
-      () => this.props.store.playList,
-      (data) => this.setState(() => ({
-        currentSongSrc: data[0].preview,
-      }))
-    )
+
+    if(this.props.store.status === 'compleated') {
+      this.song = new Howl({
+        src: [this.props.store.playList[0].preview],
+      });
+    }
   }
 
-  componentDidMount() {
-    var sound = new Howl({
-      src: this.state.currentSongSrc ? [this.state.currentSongSrc] : [""],
-    });
-
-    sound.src ? sound.play() : null;
-    console.log('hw')
+  playButtonHandler = () => {
+    this.song.play();
   }
 
   render() {
@@ -60,7 +56,10 @@ export class  Player extends React.PureComponent {
         </div>
         <div className="controls">
           <i className="material-icons">skip_previous</i>
-          <i className="material-icons" ref={this._playButtonRef}>play_arrow</i>
+          <i className="material-icons"
+            ref={this._playButtonRef}
+            onClick={this.playButtonHandler}
+          >play_arrow</i>
           {/* <span className="material-icons">pause</span> */}
           <i className="material-icons">skip_next</i>
         </div>
