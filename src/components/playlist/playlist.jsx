@@ -8,13 +8,13 @@ import {inject, observer} from 'mobx-react';
    render() {
     const {isEmpty, playList, status} = this.props.store;
     return (
-       <div className="music">
+       <div className='music'>
          {isEmpty & status === 'pending' ?
-           <p>Loading...</p>: null
+           <p className='loading'>Loading...</p>: null
          }
          {playList.map((song, i) => {
             if (i > 0) {
-              return <Song key={song.id} song={song} />
+              return <Song key={song.id} index={i} song={song} />
             }
               return null;
             })

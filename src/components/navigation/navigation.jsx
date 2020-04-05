@@ -13,6 +13,7 @@ import {inject, observer} from 'mobx-react';
 		if (event.keyCode !== 13) {
 				return;
 		}
+		this.props.store.resetCurrentSong();
 		console.log('Searching');
 		this.props.store.search();
 };
