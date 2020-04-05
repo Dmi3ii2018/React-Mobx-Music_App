@@ -3,7 +3,7 @@ import {PlayArrow} from '../play-arrow/play-arrow';
 
 
 export const Song = (prop) => {
-  const {song} = prop;
+  const {song, index} = prop;
   const {title, artist} = song;
     return (
         <div className="song">
@@ -14,7 +14,7 @@ export const Song = (prop) => {
             <p>{artist.name ? artist.name : 'no name'}</p>
             </div>
           </div>
-          <PlayArrow />
+          <PlayArrow index={index} />
         </div>
     )
 }

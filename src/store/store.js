@@ -1,6 +1,7 @@
 import {observable, action, runInAction, computed} from 'mobx';
 import {searchMusic} from '../api/api';
 import {Howl} from 'howler';
+import {PlayerHandler} from '../player-handler/player-handler';
 
 class MusicSearchStore {
     @observable term = 'adele';
@@ -10,16 +11,16 @@ class MusicSearchStore {
 		@observable currentSong = null;
 		@observable currentSongIndex = 0;
 		@observable songInstance; // TODO: do not foget to set 'null' after currentSongIndex change
-
+		@observable isChoosen = false;
     @computed
     get isEmpty() {
       return this.playList.length === 0;
 		}
 
-		@action.bound
-		setCurrentSongIndex(newIndex) {
-			this.currentSongIndex = newIndex;
-		}
+	@action.bound
+	setCurrentSongIndex(newIndex) {
+		this.currentSongIndex = newIndex;
+	}
 
     @action.bound
     setCurrentSong(index, id) {
@@ -32,28 +33,36 @@ class MusicSearchStore {
 		}
 
 		@action.bound
+		chooseSong(index) {
+			if(this.currentSongIndex === index) {
+				return;
+			}
+			this.songInstance.stop();
+			this.setCurrentSongIndex(index);
+			this.setCurrentSong(index);
+			this.isChoosen = true;
+    }
+
+		@action.bound
 		setMusicInstance() {
-			const song = new Howl({
-        src: [this.currentSong.preview],
-					onplay: () => console.log('playing'),
-					onpause: () => console.log('paused')
-      });
-			return this.songInstance = song;
+			const song = new PlayerHandler(this.currentSongIndex, this.currentSong.preview)
+			return this.songInstance = song.setPlayer();
 		}
 
 		@action.bound
 		resetCurrentSong() {
+			this.songInstance.stop();
 			this.songInstance = null;
 			this.currentSongIndex = 0;
 		}
 
     constructor() {
-        this.search();
+      this.search();
     }
 
     @action.bound
     setTerm(value) {
-        this.term = value;
+      this.term = value;
     }
 
     @action.bound

@@ -110,13 +110,13 @@ i {
 }
 .player .player-ui .progress {
   position: relative;
-  height: 2px;
+  height: 10px;
   margin: 30px 20px 0px 20px;
   background: rgba(255, 255, 255, 0.3);
 }
 .player .player-ui .progress .played {
-  width: 20%;
-  height: 2px;
+  /* width: 0%; */
+  height: 10px;
   position: absolute;
   background: #F44336;
 }
