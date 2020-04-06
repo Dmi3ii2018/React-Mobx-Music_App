@@ -1,4 +1,5 @@
 #### Музыкальный плеер на React + MobX
+Demo [here] (https://audioplayer-react-mobx.herokuapp.com/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
