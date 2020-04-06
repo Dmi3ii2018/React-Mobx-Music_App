@@ -7,11 +7,11 @@ class MusicSearchStore {
     @observable term = 'adele';
     @observable artist;
     @observable playList = [];
-		@observable status = '';
-		@observable currentSong = null;
-		@observable currentSongIndex = 0;
-		@observable songInstance; // TODO: do not foget to set 'null' after currentSongIndex change
-		@observable isChoosen = false;
+	@observable status = '';
+	@observable currentSong = null;
+	@observable currentSongIndex = 0;
+	@observable songInstance; // TODO: do not foget to set 'null' after currentSongIndex change
+	@observable isChoosen = false;
     @computed
     get isEmpty() {
       return this.playList.length === 0;

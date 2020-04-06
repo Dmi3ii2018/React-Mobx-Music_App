@@ -8,7 +8,13 @@ export const Song = (prop) => {
     return (
         <div className="song">
           <div className="info">
-            <div className="img second"></div>
+            <img
+              className="img second"
+              alt={title}
+              src={song.album.cover_small}
+              width="60"
+              height="60"
+            />
             <div className="titles">
             <h5>{title ? title : 'no title'}</h5>
             <p>{artist.name ? artist.name : 'no name'}</p>

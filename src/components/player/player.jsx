@@ -114,18 +114,11 @@ export class  Player extends React.PureComponent {
     this.setState({isPlaying: true});
   }
 
-  seekHandler = (evt) => {
+  seekHandler = (per) => {
     const song = this.props.store.songInstance;
-    evt.persist();
-    console.dir(evt);
-    console.log(evt.clientX);
-    console.log(evt.nativeEvent.clientX / window.innerWidth);
-    // if(song.playing()) {
-    //   console.log(song.duration());
-    //   console.log(per);
-    //   console.log(per * song.duration());
-    //   song.seek(song.duration() * per);
-    // }
+    if(song.playing()) {
+      song.seek(song.duration() * per);
+    }
   }
 
   render() {
@@ -144,12 +137,11 @@ export class  Player extends React.PureComponent {
           <p>{promoSong ? promoSong.artist.name : ``}</p>
           <i className="material-icons">volume_up</i>
         </div>
-        <div className="progress" onClick={this.seekHandler}>
+        <div className="progress" onClick={(evt) => this.seekHandler(evt.clientX / window.innerWidth)}>
           <div className="played"
             ref={this.progressRef}
             onClick={(evt) => console.log(evt)}
           >
-            {/* <div className="circle"></div> */}
           </div>
         </div>
         <div className="controls">

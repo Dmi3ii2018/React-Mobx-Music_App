@@ -40,7 +40,7 @@ i {
   z-index: 1;
   width: 320px;
   height: 250px;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url(http://static.stereogum.com/blogs.dir/2/files/2011/12/Adele-21.jpg) center bottom;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), center bottom;
   background-size: cover;
 }
 .player nav {
@@ -178,7 +178,6 @@ i {
   height: 60px;
   background-color: red;
   margin-right: 10px;
-  background-image: url(http://static.stereogum.com/blogs.dir/2/files/2011/12/Adele-21.jpg);
   background-position: center center;
   background-size: cover;
 }
