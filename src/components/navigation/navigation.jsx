@@ -46,7 +46,7 @@ import cn from 'classnames';
 
 		const searchClass = cn({
 			search__input: true,
-			"search__input--hide": !this.state.isSearchVisible,
+			"search__input--hide": !this.state.isSearchVisible && store.status === 'compleated',
 		})
 
       return (
@@ -60,7 +60,7 @@ import cn from 'classnames';
 						 value={term}
 						 onChange={this.onChangeHandler}
 						 onKeyUp={this.onKeyUpHandler}
-						 />
+						/>
            <i
 					 	 className="material-icons search"
 						 onClick={() => this.searchButtonHandler()}
