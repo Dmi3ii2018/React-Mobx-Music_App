@@ -10,7 +10,7 @@ import {inject, observer} from 'mobx-react';
 export class MainPage extends React.PureComponent {
     render() {
       const coverStyle = {
-        backgroundImage: this.props.store.currentSong ? `url(${this.props.store.currentSong.album.cover_medium})` : ``,
+        backgroundImage: this.props.store.currentSong ? `url(${this.props.store.currentSong.album.cover_big})` : ``,
       };
 
       return (

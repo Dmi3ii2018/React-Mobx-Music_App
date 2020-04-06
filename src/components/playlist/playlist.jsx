@@ -1,6 +1,7 @@
 import React from 'react';
 import {Song} from '../song/song';
 import {inject, observer} from 'mobx-react';
+import { LinearProgress } from '@material-ui/core';
 
 @inject('store')
 @observer
@@ -10,7 +11,7 @@ import {inject, observer} from 'mobx-react';
     return (
        <div className='music'>
          {isEmpty & status === 'pending' ?
-           <p className='loading'>Loading...</p>: null
+           <LinearProgress variant={'query'} /> : null
          }
          {playList.map((song, i) => {
             if (i > 0) {

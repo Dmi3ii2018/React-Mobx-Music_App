@@ -1,6 +1,5 @@
 import React from 'react';
 import {inject, observer} from 'mobx-react';
-import {Howl, Howler} from 'howler';
 import { reaction } from 'mobx';
 
 const Music = {
@@ -18,6 +17,7 @@ export class  Player extends React.PureComponent {
     this._playButtonRef = React.createRef();
     this.state = {
       isPlaying: false,
+      isMuted: true,
     }
     this.songId = null;
     this.trackMusicAvailability();
@@ -55,17 +55,19 @@ export class  Player extends React.PureComponent {
       if(this.props.store.songInstance) {
         this.props.store.songInstance.stop();
       }
-      this.setState({isPlaying: false});
+      this.setState(() => ({
+        isPlaying: false,
+      }));
     }
     )
   }
 
   step = () => {
     const song = this.props.store.songInstance;
-    let seek = song.seek();
-    this.progressRef.current.style.width = (((seek / song.duration()) * 100) || 0) + '%';
 
-    if (song.playing()) {
+    if (song && song.playing()) {
+      let seek = song.seek();
+      this.progressRef.current.style.width = (((seek / song.duration()) * 100) || 0) + '%';
       requestAnimationFrame(this.step);
     }
   }
@@ -114,6 +116,19 @@ export class  Player extends React.PureComponent {
     this.setState({isPlaying: true});
   }
 
+  muteButtonHandler = () => {
+    this.setState((state) => ({
+      isMuted: !state.isMuted,
+    }))
+    this.props.store.songInstance.mute(this.state.isMuted);
+  }
+
+  resetButtonHandler = () => {
+    if(this.props.store.songInstance.playing()) {
+      this.props.store.songInstance.seek(0);
+    }
+  }
+
   seekHandler = (per) => {
     const song = this.props.store.songInstance;
     if(song.playing()) {
@@ -130,12 +145,17 @@ export class  Player extends React.PureComponent {
     return (
       <div className="player-ui">
         <div className="title">
-        <h3>{promoSong ? promoSong.title : ``}</h3>
+        <h3 className="promo-title">{promoSong ? promoSong.title : ``}</h3>
         </div>
         <div className="small">
-          <i className="material-icons">replay</i>
+          <i className="material-icons"
+            onClick={() => this.resetButtonHandler()}
+          >replay</i>
           <p>{promoSong ? promoSong.artist.name : ``}</p>
-          <i className="material-icons">volume_up</i>
+          <i
+            className="material-icons"
+            onClick={() => this.muteButtonHandler()}
+          >volume_up</i>
         </div>
         <div className="progress" onClick={(evt) => this.seekHandler(evt.clientX / window.innerWidth)}>
           <div className="played"
