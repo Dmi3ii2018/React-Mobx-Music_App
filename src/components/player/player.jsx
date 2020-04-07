@@ -137,7 +137,7 @@ export class  Player extends React.PureComponent {
   }
 
   render() {
-    const {isPlaying} = this.state;
+    const {isPlaying, isMuted} = this.state;
     const promoSong = this.props.store.currentSong;
     const {currentSongIndex, playList} = this.props.store;
     // console.log(this.props.store.playList);
@@ -155,7 +155,7 @@ export class  Player extends React.PureComponent {
           <i
             className="material-icons"
             onClick={() => this.muteButtonHandler()}
-          >volume_up</i>
+            >volume_{isMuted ? `up` : `off`}</i>
         </div>
         <div className="progress" onClick={(evt) => this.seekHandler(evt.clientX / window.innerWidth)}>
           <div className="played"

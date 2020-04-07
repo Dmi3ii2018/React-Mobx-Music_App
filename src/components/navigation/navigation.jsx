@@ -42,7 +42,7 @@ import cn from 'classnames';
 
   	render() {
     	const {store} = this.props;
-		const {term} = store;
+			const {term} = store;
 
 		const searchClass = cn({
 			search__input: true,
@@ -60,6 +60,7 @@ import cn from 'classnames';
 						 value={term}
 						 onChange={this.onChangeHandler}
 						 onKeyUp={this.onKeyUpHandler}
+						 disabled={store.status === 'pending'}
 						/>
            <i
 					 	 className="material-icons search"

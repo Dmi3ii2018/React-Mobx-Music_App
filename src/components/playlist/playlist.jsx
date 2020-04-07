@@ -10,9 +10,12 @@ import { LinearProgress } from '@material-ui/core';
     const {isEmpty, playList, status} = this.props.store;
     return (
        <div className='music'>
-         {isEmpty & status === 'pending' ?
+         {isEmpty && status === 'pending' ?
            <LinearProgress variant={'query'} /> : null
          }
+        {isEmpty && status === 'compleated' ?
+          <p className="result">No results found</p> : null
+        }
          {playList.map((song, i) => {
             if (i > 0) {
               return <Song key={song.id} index={i} song={song} />

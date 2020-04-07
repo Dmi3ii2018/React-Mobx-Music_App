@@ -279,6 +279,11 @@ i {
   opacity: 0.5;
 }
 
+.result {
+  margin: 0;
+  color: white;
+}
+
 .loading {
   color: rgba(255, 255, 255, 0.5);
 }
