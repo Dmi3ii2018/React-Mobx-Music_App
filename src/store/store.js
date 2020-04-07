@@ -51,9 +51,13 @@ class MusicSearchStore {
 
 		@action.bound
 		resetCurrentSong() {
-			this.songInstance.stop();
-			this.songInstance = null;
-			this.currentSongIndex = 0;
+			try {
+				this.songInstance.stop();
+				this.songInstance = null;
+				this.currentSongIndex = 0;
+			} catch (error) {
+				console.log(error);
+			}
 		}
 
     constructor() {
