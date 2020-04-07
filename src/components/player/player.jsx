@@ -38,8 +38,16 @@ export class  Player extends React.PureComponent {
         }
 
         store.songInstance.on('play', () => {
-          console.log('playing');
           requestAnimationFrame(this.step);
+          this.setState(() => ({
+            isPlaying: true,
+          }))
+        })
+
+        store.songInstance.on('pause', () => {
+          this.setState(() => ({
+            isPlaying: false,
+          }))
         })
 
         store.songInstance.on('end', () => {
@@ -77,42 +85,38 @@ export class  Player extends React.PureComponent {
   }
 
   playButtonHandler = () => {
-    console.log(this.props.store.songInstance.duration());
-    setTimeout(() => {
-    }, 3000);
     this.props.store.songInstance.play();
-    this.setState(() => ({
-    isPlaying: true,
-  }))
+    this.props.store.setSongPlayingStatus(true);
   }
 
   pauseButtonHandler = () => {
     this.props.store.songInstance.pause();
-    this.setState(() => ({
-    isPlaying: false,
-  }))
+    this.props.store.setSongPlayingStatus(false);
+
   }
 
   musicChangeHandler = (term) => {
-    let index = this.props.store.currentSongIndex;
+    const {store} = this.props;
+    let index = store.currentSongIndex;
     switch(term) {
       case Music.NEXT:
-        index = this.props.store.currentSongIndex + 1;
+        index = store.currentSongIndex + 1;
         break;
       case Music.PREV:
-        index = this.props.store.currentSongIndex - 1;
+        index = store.currentSongIndex - 1;
         break;
       default: index;
     }
 
-    if(index < 0 || index >= this.props.store.playList.length) {
+    if(index < 0 || index >= store.playList.length) {
       return;
     }
-    this.props.store.songInstance.stop();
+    store.songInstance.stop();
 
-    this.props.store.setCurrentSongIndex(index);
-    this.props.store.setCurrentSong(index, null);
-    this.props.store.songInstance.play();
+    store.setCurrentSongIndex(index);
+    store.setCurrentSong(index, null);
+    store.songInstance.play();
+    store.setSongPlayingStatus(true);
     this.setState({isPlaying: true});
   }
 
@@ -139,8 +143,7 @@ export class  Player extends React.PureComponent {
   render() {
     const {isPlaying, isMuted} = this.state;
     const promoSong = this.props.store.currentSong;
-    const {currentSongIndex, playList} = this.props.store;
-    // console.log(this.props.store.playList);
+    const {currentSongIndex = 0, playList = []} = this.props.store;
 
     return (
       <div className="player-ui">
@@ -177,7 +180,7 @@ export class  Player extends React.PureComponent {
             ref={this._playButtonRef}
             onClick={this.playButtonHandler}
             >play_arrow</i>
-        }
+          }
           <i
             className={currentSongIndex !== playList.length - 1 ? 'material-icons' : 'material-icons material-icons__disable'}
             onClick={() => this.musicChangeHandler(Music.NEXT)}

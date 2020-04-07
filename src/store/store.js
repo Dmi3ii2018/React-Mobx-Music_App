@@ -7,15 +7,22 @@ class MusicSearchStore {
     @observable term = 'adele';
     @observable artist;
     @observable playList = [];
-	@observable status = '';
-	@observable currentSong = null;
-	@observable currentSongIndex = 0;
-	@observable songInstance; // TODO: do not foget to set 'null' after currentSongIndex change
-	@observable isChoosen = false;
+    @observable status = '';
+    @observable currentSong = null;
+    @observable currentSongIndex = 0;
+    @observable songInstance; // TODO: do not foget to set 'null' after currentSongIndex change
+    @observable isChoosen = false;
+    @observable isPlaying = false;
+
     @computed
     get isEmpty() {
       return this.playList.length === 0;
-		}
+    }
+
+  @action.bound
+  setSongPlayingStatus(status) {
+    this.isPlaying = status;
+  }
 
 	@action.bound
 	setCurrentSongIndex(newIndex) {
@@ -70,21 +77,19 @@ class MusicSearchStore {
     }
 
     @action.bound
-    async search() {
-        try {
-            this.status = 'pending';
-            const result = await searchMusic(this.term);
-            runInAction(() => {
-                this.playList = result.data;
-								this.status = 'compleated';
-								this.currentSong = result.data[0];
-								console.log('seted cur song');
-            })
-
-            console.log(result.data);
-        } catch (error) {
-            console.log(error);
-        }
+    async search(term = this.term) {
+      try {
+        this.status = 'pending';
+        const result = await searchMusic(term);
+        runInAction(() => {
+          this.playList = result.data;
+          this.status = 'compleated';
+          this.currentSong = result.data[0];
+          console.log('seted cur song');
+        })
+      } catch (error) {
+          console.log(error);
+      }
     }
 }
 

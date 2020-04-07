@@ -10,7 +10,6 @@ export class PlayerHandler {
     setPlayer = () => {
         const song = new Howl({
 					src: [this.songSrc],
-						onpause: () => console.log('paused')
 				});
 				this.songInstance = song;
       return song;

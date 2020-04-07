@@ -5,8 +5,26 @@ import cn from 'classnames';
 @inject('store')
 @observer
 export class PlayArrow extends React.PureComponent {
+  constructor() {
+    super();
+    this.state = {isPlaying: false};
+  }
+
+  playButtonHandler = () => {
+      const {store, index} = this.props;
+      store.chooseSong(index);
+
+    if(store.songInstance.playing() && store.currentSongIndex === index) {
+      store.songInstance.pause();
+      store.setSongPlayingStatus(false);
+    } else {
+      store.songInstance.play();
+      store.setSongPlayingStatus(true);
+    }
+  }
+
     render() {
-			const {store, index} = this.props;
+      const {store, index} = this.props;
 
 			const playButtonClass = cn({
 				'material-icons': true,
@@ -17,8 +35,12 @@ export class PlayArrow extends React.PureComponent {
         return (
 					<div className="state">
 						<i className={playButtonClass}
-							onClick={() => store.chooseSong(index)}
-						>play_arrow</i>
+							onClick={() => this.playButtonHandler()}
+            >{
+              store.currentSongIndex === index && store.isPlaying
+                ? `pause`
+                : `play_arrow`}
+            </i>
 					</div>
         )
     }
