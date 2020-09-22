@@ -25,7 +25,8 @@ import cn from 'classnames';
 	}
 
 	onKeyUpHandler = (event) => {
-		if (event.keyCode !== 13) {
+		console.log(this.props);
+		if (event.keyCode !== 13 || !this.props.store.term) {
 				return;
 		}
 		this.search();
@@ -33,6 +34,9 @@ import cn from 'classnames';
 
 	searchButtonHandler = () => {
 		const {isSearchVisible} = this.state;
+		if (!this.props.store.term) {
+				return;
+		}
 		if(isSearchVisible) {
 			this.search();
 		} else {

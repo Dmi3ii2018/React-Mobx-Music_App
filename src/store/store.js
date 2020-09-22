@@ -73,11 +73,17 @@ class MusicSearchStore {
 
     @action.bound
     setTerm(value) {
+      if(value === this.term) {
+        return;
+      }
       this.term = value;
     }
 
     @action.bound
     async search(term = this.term) {
+      if(!term) {
+        return;
+      }
       try {
         this.status = 'pending';
         const result = await searchMusic(term);
