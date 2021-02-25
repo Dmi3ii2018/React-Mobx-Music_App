@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Dmi3ii2018/React-Mobx-Music_App/static/css/main.362dff8a.chunk.css",
+    "main.js": "/Dmi3ii2018/React-Mobx-Music_App/static/js/main.e47936d0.chunk.js",
+    "main.js.map": "/Dmi3ii2018/React-Mobx-Music_App/static/js/main.e47936d0.chunk.js.map",
+    "runtime-main.js": "/Dmi3ii2018/React-Mobx-Music_App/static/js/runtime-main.94f5c165.js",
+    "runtime-main.js.map": "/Dmi3ii2018/React-Mobx-Music_App/static/js/runtime-main.94f5c165.js.map",
+    "static/js/2.7f05d3fc.chunk.js": "/Dmi3ii2018/React-Mobx-Music_App/static/js/2.7f05d3fc.chunk.js",
+    "static/js/2.7f05d3fc.chunk.js.map": "/Dmi3ii2018/React-Mobx-Music_App/static/js/2.7f05d3fc.chunk.js.map",
+    "index.html": "/Dmi3ii2018/React-Mobx-Music_App/index.html",
+    "precache-manifest.8a39fcb0b4a40f384bbf074545b4dae8.js": "/Dmi3ii2018/React-Mobx-Music_App/precache-manifest.8a39fcb0b4a40f384bbf074545b4dae8.js",
+    "service-worker.js": "/Dmi3ii2018/React-Mobx-Music_App/service-worker.js",
+    "static/css/main.362dff8a.chunk.css.map": "/Dmi3ii2018/React-Mobx-Music_App/static/css/main.362dff8a.chunk.css.map",
+    "static/js/2.7f05d3fc.chunk.js.LICENSE.txt": "/Dmi3ii2018/React-Mobx-Music_App/static/js/2.7f05d3fc.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.94f5c165.js",
+    "static/js/2.7f05d3fc.chunk.js",
+    "static/css/main.362dff8a.chunk.css",
+    "static/js/main.e47936d0.chunk.js"
+  ]
+}
