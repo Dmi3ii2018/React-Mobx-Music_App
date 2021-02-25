@@ -8,6 +8,7 @@ import { LinearProgress } from '@material-ui/core';
  export class Playlist extends React.PureComponent {
    render() {
     const {isEmpty, playList, status} = this.props.store;
+    console.log(isEmpty, playList, status);
     return (
        <div className='music'>
          {isEmpty && status === 'pending' ?
