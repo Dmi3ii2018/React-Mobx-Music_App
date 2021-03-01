@@ -4,7 +4,7 @@ import { Howl } from "howler";
 import { PlayerHandler } from "../player-handler/player-handler";
 
 class MusicSearchStore {
-  @observable term = "Год змеи";
+  @observable term = " My Chemical Romance";
   @observable artist;
   @observable playList = [];
   @observable status = "";
